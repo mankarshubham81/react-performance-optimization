@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 // import MyComponents from './MyComponents';
-import {data }from './sampleData'
+import { data }from './sampleData'
+
+function getSampleDataLength(arr){
+  console.log("Re Calculating");
+  let count = 0;
+  for(let i = 0; i < arr.length; i++) count++
+  return count;
+}
 
 const MyComponents = (props) => {
 
-  const totalEntries = data.length;
-  console.log("data lienght is ", totalEntries);
+  const totalEntries =  useMemo(() => getSampleDataLength(data), []);
+  // const totalEntries = getSampleDataLength(data);
+  // console.log("data lienght is ", totalEntries);
 
   window.addEventListener("load", () => console.log("Loaded"));
 
