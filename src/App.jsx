@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import MyComponents from './components/MyComponents';
+// import MyComponents from './components/MyComponents';
+
+const MyComponents = React.lazy(() => import("./components/MyComponents"))
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,7 +24,9 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           Increment
         </button>
+        <Suspense fallback={<p>This is Loading...</p>}>
         <MyComponents count={count} />
+        </Suspense>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
