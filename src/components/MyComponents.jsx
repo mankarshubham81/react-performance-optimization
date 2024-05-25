@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useCallback } from 'react'
 // import MyComponents from './MyComponents';
 import { data }from './sampleData'
 
@@ -15,7 +15,20 @@ const MyComponents = (props) => {
   // const totalEntries = getSampleDataLength(data);
   // console.log("data lienght is ", totalEntries);
 
-  window.addEventListener("load", () => console.log("Loaded"));
+  const handleOnwindowload = useCallback(() => {
+    console.log("Loaded")
+  }, [])
+
+  useEffect(() => {
+    console.log("counter effect", props.count)
+    window.addEventListener("load", handleOnwindowload);
+  
+    return () => {
+      window.removeEventListener("load", handleOnwindowload);
+    }
+  }, [props.count, handleOnwindowload])
+  
+
 
   return (
     <div>
